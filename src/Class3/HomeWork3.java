@@ -168,14 +168,6 @@ class q3_5 {
 
 		System.out.println();
 	}
-	public void testRomdon() {
-		int testInt= 10;
-		for (int i = 1; i<= 20; i ++ ) {
-			testInt = (int)(Math.random()*(10-5+1))+5;
-			System.out.println(testInt);
-		}
-		
-	}
 
 	public void pokerShuffle() {
 
@@ -195,26 +187,21 @@ class q3_5 {
 				tempPokerArray = pokerArray;
 				pokerArray = new String[52];	
 				
-				//System.out.println(shuffleCount + ", " + shuffleSum);
 				for (int j = 0; j < pokerArray.length; j ++) {
 					
 					//ver2
 					if (j < shuffleSum) {
-						//System.out.println("1 " + j + "\t" + ( shuffleCount + j -1) );
 						pokerArray[j] = tempPokerArray[shuffleCount + j -1];
 					}else {
 						if (j >= shuffleSum && ( shuffleSum + shuffleCount -1) == pokerArray.length) {
-							//System.out.println("2 " + j + "\t" + ( j - shuffleSum ) );
 							pokerArray[j] = tempPokerArray[j - shuffleSum ];
 						}else {
 							
 							if( j >= shuffleSum && j < (shuffleSum + shuffleCount -1) && shuffleCount > 1) {
 								//第一段
-								//System.out.println("3 " + j + "\t" + ( j - shuffleSum  ) );
 								pokerArray[j] = tempPokerArray[j - shuffleSum  ];
 							}else {
 								//第三段
-								//System.out.println("4 " + j + "\t" + ( j ) );
 								pokerArray[j] = tempPokerArray[ j ];
 							}
 							
