@@ -183,8 +183,6 @@ class Q4_4 {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("叫块瞦代计:");
 		insNum = scanner.nextInt();
-		
-		
 	}
 	public void checkNum() {
 		
@@ -208,7 +206,6 @@ class Q4_4 {
 		
 		System.out.println("沧伐盞絏秨﹍叫瞦代1~100絛瞅ず计璝瞦い穦氨ゎ笴栏~");
 		initNum();
-		System.out.println(targetNum);
 		
 		do {
 			
@@ -218,7 +215,7 @@ class Q4_4 {
 			
 			if (targetNum != insNum) {
 				insNumStr = insNumStr + ", ";
-				System.out.println("瞦代计 = " + insNumStr + ", 瞦 " + insTimes + "Ω");
+				System.out.println("瞦代计 = " + insNumStr + " 瞦 " + insTimes + "Ω");
 				checkNum();
 				System.out.println("⊿Τ瞦い计絛瞅 " + startNum + "~" + endNum);
 				
@@ -226,6 +223,7 @@ class Q4_4 {
 				
 			}else {
 				System.out.println("и材 " + insTimes + " Ω瞦い沧伐盞絏 : " + targetNum);
+				System.out.println("羆瞦代硂ㄇ计 = " + insNumStr);
 				
 			}
 			
@@ -233,6 +231,8 @@ class Q4_4 {
 		
 		
 	}
+	
+	
 	
 	
 }
