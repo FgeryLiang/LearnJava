@@ -25,6 +25,7 @@ class Q5_1 {
 	String printStr = "I have a pen.";
 	StringBuilder builder = new StringBuilder("");
 	StringBuffer buffer = new StringBuffer("");
+	int runStep = 1;
 
 	public void run() {
 
@@ -38,6 +39,10 @@ class Q5_1 {
 		useStringBuiderReplace(printStr);
 		System.out.println("第一題(StringBuider):" + builder);
 
+		builder = new StringBuilder("");
+		buffer = new StringBuffer("");
+		runStep = 2;
+		
 		System.out.println(); 
 		System.out.println("第二題(String):" + useStringAppend(printStr));
 		
@@ -55,13 +60,11 @@ class Q5_1 {
 	}
 
 	public void useStringBufferReplace(String strValue) {
-		//buffer.append(strValue);
 		useStringBufferAppend(strValue);
 		buffer.replace(buffer.indexOf("pen"), (buffer.indexOf("pen") + "pen".length()), "apple");
 	}
 
 	public void useStringBuiderReplace(String strValue) {
-		//builder.append(strValue);
 		useStringBuiderAppend(strValue);
 		builder.replace(builder.indexOf("pen"), (builder.indexOf("pen") + "pen".length()), "apple");
 	}
@@ -71,14 +74,21 @@ class Q5_1 {
 	}
 	
 	public void useStringBufferAppend(String strValue) {
+		if(runStep > 1){
+			buffer.append(printStr.replace(".", ", ") );
+		}		
 		buffer.append(strValue);
 		
 	}
 	
 	public void useStringBuiderAppend(String strValue) {
+		if(runStep > 1){
+			builder.append(printStr.replace(".", ", ") );
+		}
 		builder.append(strValue);
 		
 	}
+	
 }
 
 class Q5_2 {
@@ -123,12 +133,6 @@ class Q5_2 {
 		Date day2 = C.getTime();
 
 		checkDateDays(day, day2);
-		// System.out.println(df.format(day));
-		// System.out.println(df.format(day2));
-		// System.out.println(df.format(day3));
-		// System.out.println(day2.getTime());
-		// System.out.println(day3.getTime());
-		// System.out.println(df.format(day3.getTime()) );
 
 	}
 
@@ -257,7 +261,6 @@ class Q5_4{
 		System.out.print("請輸入第一個數字:");
 	    num1 = scanner.nextBigDecimal();
 	    System.out.printf("第一個數字: %.1f!", num1 ) ;
-	    
 		System.out.println();
 		
 		System.out.print("請輸入第二個數字:");
@@ -265,10 +268,13 @@ class Q5_4{
 	    System.out.printf("第二個數字: %.1f!", num2 ) ;
 		System.out.println();
 		
+	}
+	
+	public void insOperate(){
+
 		System.out.println("請輸入要運算的符號 +(加) , -(減) , *(乘法) , /(除)");
 		System.out.print("符號:");
 		s_operate = scanner.next();
-		
 	}
 	
 	public void runComput() {
@@ -277,7 +283,17 @@ class Q5_4{
 		System.out.println("請輸入兩個數字，並選擇要執行的加減乘除動作，會幫您進行運算");
 		
 		while( !(isRun.equalsIgnoreCase("N")) ) {
-			insNum();
+			
+			try{
+				insNum();				
+			}catch( Exception e){
+				System.out.println("輸入格式錯誤，請重新輸入");
+				scanner.next();
+				continue;
+			}
+			
+			insOperate();	
+			
 			switch (s_operate) {
 			case "+":
 				System.out.println("您選了加法 , " + num1  + " + " +  num2 + " = " + (num1.add(num2)));
@@ -291,7 +307,9 @@ class Q5_4{
 			case "/":
 				System.out.println("您選了除法 , " + num1  + " / " +  num2 + " = " + (num1.divide(num2, 2, BigDecimal.ROUND_HALF_DOWN)));
 				break;
-			
+			default: 
+                System.out.println("輸入非 +, -, *, / 字串，請重新輸入"); 
+                continue;
 			}
 			
 
@@ -312,3 +330,5 @@ class Q5_4{
 		
 		
 }
+
+
