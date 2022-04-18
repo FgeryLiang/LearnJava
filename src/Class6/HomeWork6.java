@@ -283,7 +283,7 @@ class Q6_4{
 		getCustSumAvgCost();
 		for (String key : custSumCostMap.keySet()) {	
 			System.out.println("編號:" + key + " , 姓名: " + getCustNameMap(key) + ", 平均消費金額: " + 
-					( custSumCostMap.get(key) / custOrderCountMap.get(key))  );
+					( (float) custSumCostMap.get(key) / (float) custOrderCountMap.get(key))  );
 		}
 	}
 	public void printCustSumCost(Map<String, Integer> asMap){
@@ -480,7 +480,7 @@ class Q6_5{
 		getCustSumAvgCost();
 		for ( int cusIndex = 0; cusIndex < custSumCostList.size(); cusIndex ++) {
 			System.out.println("編號:" + custNoList.get(cusIndex) + " , 姓名: " + getCustNameList(cusIndex) + ", 平均消費金額: " +
-					getCustSumCostList(cusIndex) / getCustOrderCountList(cusIndex) );
+					(float) getCustSumCostList(cusIndex) / (float) getCustOrderCountList(cusIndex) );
 		}
 	}
 	
