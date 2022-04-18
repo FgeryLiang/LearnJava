@@ -183,8 +183,6 @@ class Q6_4{
 	public void run() {
 		initMap();
 		System.out.println("6-4   -----------------");
-//		System.out.println("1.用會員編號查詢會員買的商品，請輸入會員編號:");
-//		getCustOrderlist(inputPara());
 		
 		System.out.println("1.用會員編號查詢會員買的商品");
 		getCustOrderlist();
@@ -195,11 +193,11 @@ class Q6_4{
 		System.out.println();
 		
 		System.out.println("3.依照消費總金額高到低排序");
-		setSortDesc();
+		setSortDesc("Desc");
 		System.out.println();
 		
 		System.out.println("4.依照消費總金額低到高排序");
-		printCustSumCost(custSumCostMap);
+		setSortDesc("Asc");
 		System.out.println();
 		
 	}
@@ -210,11 +208,6 @@ class Q6_4{
 		setOrderDescMap(orderDescMap);
 		setOrderAmtMap(orderAmtMap);
 	}
-
-//	public String inputPara() {
-//		Scanner scanner = new Scanner(System.in);
-//		return scanner.next();
-//	}
 
 	public void setCustNameMap(Map<String, String> custNameMap) {
 		custNameMap.put("C1", "小Q");
@@ -265,16 +258,7 @@ class Q6_4{
 	public int getOrderAmtMap(int index) {
 		return orderAmtMap.get( getOrderNo(index)  );
 	}
-	
-//	public void getCustOrderlist(String custNo) {
-//		for(int index = 1; index <= orderCustMap.size(); index ++) {
-//			if ( getOrderCustMap(index).equals(custNo) ) {
-//				System.out.println(custNo + "\t" + getCustNameMap(custNo) + "\t" + getOrderNo(index) + "\t" + 
-//						getOrderDescMap(index) + "\t" + getOrderAmtMap(index));
-//			}
-//		}
-//	}
-	
+
 	public void getCustOrderlist() {
 		String custNo = null;
 		for(int index = 1; index <= orderCustMap.size(); index ++) {
@@ -308,14 +292,15 @@ class Q6_4{
 		}
 	}
 	
-	public void setSortDesc() {
+	public void setSortDesc(String type) {
 		LinkedHashMap<String, Integer> custSortCostMap = new LinkedHashMap<String, Integer>();
 		Map<String, Integer> custSumCostCloneMap = new TreeMap<String, Integer >(custSumCostMap);
 		String temp;
 		for (String key1 : custSumCostCloneMap.keySet()) {
 			temp = null;
 			for (String key2 : custSumCostCloneMap.keySet()) {
-				if( custSumCostCloneMap.get(key1) <= custSumCostCloneMap.get(key2) && custSumCostCloneMap.get(key2) != 0) {
+				if( ( custSumCostCloneMap.get(key1) <= custSumCostCloneMap.get(key2) && custSumCostCloneMap.get(key2) != 0 && type == "Desc") ||
+						( custSumCostCloneMap.get(key1) >= custSumCostCloneMap.get(key2) && custSumCostCloneMap.get(key2) != 0 && type == "Asc") )	{
 					temp = key2;
 				}
 			}
@@ -353,16 +338,16 @@ class Q6_5{
 		System.out.println();
 		
 		System.out.println("3.依照消費總金額高到低排序");
-		setSortDesc();
+		setSortDesc("Desc");
 		System.out.println();
 		
 		System.out.println("4.依照消費總金額低到高排序");
-		printCustSumCost(custSumCostList);
+		setSortDesc("Asc");
 		System.out.println();
 	}
 	
 	public void initList() {
-		setCustNameIdList(custNoList);
+		setCustNoList(custNoList);
 		setCustNameList(custNameList);
 		setOrderNoList(orderNoList);
 		setOrderCustNoList(orderCustNoList);
@@ -370,7 +355,7 @@ class Q6_5{
 		setOrderAmtList(orderAmtList);
 	}
 	
-	public void setCustNameIdList(ArrayList<String> custNameIdList) {
+	public void setCustNoList(ArrayList<String> custNameIdList) {
 		custNameIdList.add("C1");
 		custNameIdList.add("C2");
 		custNameIdList.add("C3");
@@ -499,15 +484,24 @@ class Q6_5{
 		}
 	}
 	
-	public void printCustSumCost( LinkedList<Integer> asList){
-		for (int cusIndex = 0; cusIndex < asList.size(); cusIndex ++){
-			System.out.println("編號:" + custNoList.get(cusIndex) + " , 姓名: " + getCustNameList(cusIndex) + ", 總消費金額: " + asList.get(cusIndex)  );
+	public void printCustSumCost( ArrayList<String> asIdList, LinkedList<Integer> asCostList){
+		
+		int temp = 0;
+		for (int cusIndex = 0; cusIndex < asCostList.size(); cusIndex ++){
+			for (int index = 0; index < custNoList.size(); index++) {
+				if ( asIdList.get(cusIndex).equals(custNoList.get(index))  ) {
+					temp = index;
+				}
+			}
+			System.out.println("編號:" + asIdList.get(cusIndex) + " , 姓名: " + getCustNameList(temp) + ", 總消費金額: " + asCostList.get(cusIndex)  );
 		}
+		
 	}
 	
-	public void setSortDesc() {
+	public void setSortDesc(String type) {
 
 		LinkedList<Integer> custSortCostList = new LinkedList<Integer>();
+		ArrayList<String> custSortCostNoList = new ArrayList<String>();
 		LinkedList<Integer> custSumCostCloneList = new LinkedList<Integer>(custSumCostList);
 
 		int temp;
@@ -515,18 +509,20 @@ class Q6_5{
 			temp = 99;
 			for (int cusIndex2 = 0; cusIndex2 < custSumCostCloneList.size(); cusIndex2 ++){
 				
-				if ( custSumCostCloneList.get(cusIndex) <= custSumCostCloneList.get(cusIndex2) && custSumCostCloneList.get(cusIndex2) != 0) {
+				if ( ( custSumCostCloneList.get(cusIndex) <= custSumCostCloneList.get(cusIndex2) && custSumCostCloneList.get(cusIndex2) != 0 && type == "Desc") ||
+						( custSumCostCloneList.get(cusIndex) >= custSumCostCloneList.get(cusIndex2) && custSumCostCloneList.get(cusIndex2) != 0 && type == "Asc") )	{
 					temp = cusIndex2;
 				}
 			}
 			if(temp != 99){
 				custSortCostList.add( custSumCostCloneList.get(temp) );
+				custSortCostNoList.add( custNoList.get(temp));
 				custSumCostCloneList.remove(temp);
 				custSumCostCloneList.add(temp, 0);
 				
 			}
 		}
-		printCustSumCost(custSortCostList);
+		printCustSumCost(custSortCostNoList, custSortCostList);
 	}
 	
 	
