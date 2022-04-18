@@ -25,8 +25,8 @@ public class HomeWork6 {
 }
 
 class Q6_1 {
-	Map<String, String> treeMap = new HashMap<String, String>();
-	// LinkedHashMap<String, String> treeMap = new LinkedHashMap<String, String>();
+	//Map<String, String> treeMap = new HashMap<String, String>();
+	LinkedHashMap<String, String> treeMap = new LinkedHashMap<String, String>();
 	// Map<String, String> treeMap = new TreeMap<String, String>();
 
 	public void run() {
