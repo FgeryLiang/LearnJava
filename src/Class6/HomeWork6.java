@@ -1,9 +1,12 @@
 package Class6;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -25,7 +28,7 @@ public class HomeWork6 {
 }
 
 class Q6_1 {
-	//Map<String, String> treeMap = new HashMap<String, String>();
+	// Map<String, String> treeMap = new HashMap<String, String>();
 	LinkedHashMap<String, String> treeMap = new LinkedHashMap<String, String>();
 	// Map<String, String> treeMap = new TreeMap<String, String>();
 
@@ -36,14 +39,14 @@ class Q6_1 {
 		putName("C1", "紅色");
 		System.out.println("第一題(Map):");
 		printMap();
-		
+
 		System.out.println();
 
 		System.out.println("第二題(RemoveAndPutMap):");
 		deleteMap("C2");
 		putName("C4", "天天");
 		printMap();
-		
+
 		System.out.println();
 	}
 
@@ -62,26 +65,22 @@ class Q6_1 {
 			System.out.println("key:" + key + " , value: " + treeMap.get(key));
 		}
 	}
-	
+
 	public void deleteMap(String key) {
 		treeMap.remove(key);
 	}
 }
 
-class Q6_2{
+class Q6_2 {
 	LinkedList<String> arraylistId = new LinkedList<String>();
 	LinkedList<String> arraylistName = new LinkedList<String>();
-//	ArrayList<String> arraylistId = new ArrayList<String>();
-//	ArrayList<String> arraylistName = new ArrayList<String>();
-	
-	
+
 	public void run() {
-		
 
 		System.out.println("6-2   -----------------");
 		initArraylist();
-		
-		modifyData( getIndex("C1"), "紅色" );
+
+		modifyData(getIndex("C1"), "紅色");
 		System.out.println("第一題(List):");
 		printData();
 		System.out.println();
@@ -92,17 +91,17 @@ class Q6_2{
 		printData();
 		System.out.println();
 	}
-	
+
 	public void initArraylist() {
 		arraylistId.add("C1");
 		arraylistId.add("C2");
 		arraylistId.add("C3");
-		
+
 		arraylistName.add("藍色");
 		arraylistName.add("香菇");
 		arraylistName.add("小草");
 	}
-	
+
 	public int getIndex(String listValue) {
 		for (int index = 0; index < arraylistId.size(); index++) {
 			if (listValue == arraylistId.get(index)) {
@@ -111,419 +110,522 @@ class Q6_2{
 		}
 		return -1;
 	}
-	
-	public void removeTag(int index ) {
+
+	public void removeTag(int index) {
 		arraylistId.remove(index);
 		arraylistName.remove(index);
 	}
-	
+
 	public void addTag(String id, String data) {
 		arraylistId.add(id);
-		arraylistName.add(data);//加入
+		arraylistName.add(data);// 加入
 	}
-	
+
 	public void modifyData(int index, String value) {
 		arraylistName.remove(index);
-		arraylistName.add(index, value);//覆蓋
+		arraylistName.add(index, value);// 覆蓋
 	}
-	
+
 	public void printData() {
-		for (int index = 0; index < arraylistId.size(); index ++) {
+		for (int index = 0; index < arraylistId.size(); index++) {
 			System.out.println("key:" + arraylistId.get(index) + " , value: " + arraylistName.get(index));
 		}
 	}
-	
+
 }
 
-class Q6_3{
-//	TreeSet<String> lotto = new TreeSet<String>();
+class Q6_3 {
 	TreeSet<Integer> treeSet = new TreeSet<Integer>();
-	
+
 	public void run() {
 		System.out.println("6-3   -----------------");
 		genNumber();
 		System.out.println();
 	}
-	
+
 	public int getNum() {
-		return ( (int) (Math.random() * ( 49 -1 + 1)) + 1 );
+		return ((int) (Math.random() * (49 - 1 + 1)) + 1);
 	}
-	
+
 	public void setNum() {
-		
-		while( treeSet.size() <= 6){
+
+		while (treeSet.size() <= 6) {
 			treeSet.add(getNum());
 		}
 	}
-	
+
 	public void genNumber() {
-		
-		for(int i = 1; i <= 10; i ++){
+
+		for (int i = 1; i <= 10; i++) {
 			setNum();
-			System.out.println("第" + i + "組:\t" +  SetStringRemoveBrackets( treeSet.toString() ) ); 
+			System.out.println("第" + i + "組:\t" + SetStringRemoveBrackets(treeSet.toString()));
 			treeSet.clear();
 		}
 	}
-	
+
 	public String SetStringRemoveBrackets(String treeSetStr) {
-		return ( treeSetStr.replace('[', ' ').replace(']', ' ') );
+		return (treeSetStr.replace('[', ' ').replace(']', ' '));
 	}
 }
 
+class Q6_4 {
 
-class Q6_4{
-
-	Map<String, String> custNameMap = new TreeMap<String, String >(); //會員名單
-	Map<String, String> orderCustMap = new TreeMap<String, String >();//訂單所屬會員
-	Map<String, String> orderDescMap = new TreeMap<String, String >();//訂單內容
-	Map<String, Integer> orderAmtMap = new TreeMap<String, Integer>();//訂單金額
-	Map<String, Integer> custSumCostMap = new TreeMap<String, Integer >();//會員花費金額
-	Map<String, Integer> custOrderCountMap = new TreeMap<String, Integer >();//會員訂單數
+	String[] orderDesc = { "訂單", "旅客", "訂購內容", "金額" };
+	String[] custDesc = { "id", "name", "count", "sumPrice" };
+	Map<String, Object> custNameMap = new TreeMap<String, Object>(); // 會員
+	Map<String, Object> orderInfoMap = new TreeMap<String, Object>(); // 訂單
 
 	public void run() {
 		initMap();
 		System.out.println("6-4   -----------------");
-		
+
 		System.out.println("1.用會員編號查詢會員買的商品");
 		getCustOrderlist();
 		System.out.println();
-		
+
 		System.out.println("2.算出每位會員的平均每筆消費金額");
 		getCustAvgCost();
 		System.out.println();
-		
+
 		System.out.println("3.依照消費總金額高到低排序");
-		setSortDesc("Desc");
+		sort("Desc");
 		System.out.println();
-		
+
 		System.out.println("4.依照消費總金額低到高排序");
-		setSortDesc("Asc");
+		sort("Asc");
 		System.out.println();
-		
+
 	}
-	
+
 	public void initMap() {
+		setOrderInfoMap(orderInfoMap);
 		setCustNameMap(custNameMap);
-		setOrderCustMap(orderCustMap);
-		setOrderDescMap(orderDescMap);
-		setOrderAmtMap(orderAmtMap);
 	}
 
-	public void setCustNameMap(Map<String, String> custNameMap) {
-		custNameMap.put("C1", "小Q");
-		custNameMap.put("C2", "小咪");
-		custNameMap.put("C3", "查理");
+	public ArrayList<Object> setSinOrderInfo(String value1, String value2, String value3, int value4) {
+		ArrayList<Object> sinOrderInfo = new ArrayList<Object>();
+		sinOrderInfo.add(value1);
+		sinOrderInfo.add(value2);
+		sinOrderInfo.add(value3);
+		sinOrderInfo.add(value4);
+		return sinOrderInfo;
 	}
 
-	public void setOrderCustMap(Map<String, String> orderCustMap) {
-		orderCustMap.put("O001", "C1");
-		orderCustMap.put("O002", "C1");
-		orderCustMap.put("O003", "C2");
-		orderCustMap.put("O004", "C2");
-		orderCustMap.put("O005", "C3");
+	public ArrayList<Object> setSinCustInfo(String value1, String value2, int value3, double value4) {
+		ArrayList<Object> sinCustInfo = new ArrayList<Object>();
+		sinCustInfo.add(value1);
+		sinCustInfo.add(value2);
+		int[] setOrder = getSumAmtandCustOrderCOunt(value1);
+
+		sinCustInfo.add(setOrder[0]);
+		sinCustInfo.add(setOrder[1]);
+
+		return sinCustInfo;
 	}
 
-	public void setOrderDescMap(Map<String, String> orderDescMap) {
-		orderDescMap.put("O001", "衣服");
-		orderDescMap.put("O002", "3C");
-		orderDescMap.put("O003", "遊戲");
-		orderDescMap.put("O004", "保養品");
-		orderDescMap.put("O005", "攝影機");
+	public int[] getSumAmtandCustOrderCOunt(String custNo) {
+		int cnt = 0, sum = 0;
+		for (int index = 1; index <= orderInfoMap.size(); index++) {
+			ArrayList<?> sinOrderInfoc = new ArrayList<String>();
+			sinOrderInfoc = (ArrayList<?>) (orderInfoMap.get(getOrderNo(index)));
+
+			for (int index2 = 0; index2 < sinOrderInfoc.size(); index2++) {
+				if ((orderDesc[index2].equals("旅客") && !((sinOrderInfoc.get(index2)).equals(custNo)))) {
+					break;
+				}
+
+				if (orderDesc[index2].equals("金額")) {
+					cnt += 1;
+					sum += (int) sinOrderInfoc.get(index2);
+				}
+			}
+		}
+
+		int[] rtnorder = { cnt, sum };
+		return rtnorder;
 	}
 
-	public void setOrderAmtMap(Map<String, Integer> orderAmtMap) {
-		orderAmtMap.put("O001", 789);
-		orderAmtMap.put("O002", 1999);
-		orderAmtMap.put("O003", 1899);
-		orderAmtMap.put("O004", 3300);
-		orderAmtMap.put("O005", 14999);
+	public void setCustNameMap(Map<String, Object> custNameMap) {
+		custNameMap.put("C1", setSinCustInfo("C1", "小Q", 0, 0));
+		custNameMap.put("C2", setSinCustInfo("C2", "小咪", 0, 0));
+		custNameMap.put("C3", setSinCustInfo("C3", "查理", 0, 0));
 	}
-	
+
+	public void setOrderInfoMap(Map<String, Object> orderInfoMap) {
+		orderInfoMap.put("O001", setSinOrderInfo("O001", "C1", "衣服", 789));
+		orderInfoMap.put("O002", setSinOrderInfo("O002", "C1", "3C", 1999));
+		orderInfoMap.put("O003", setSinOrderInfo("O003", "C2", "遊戲", 1899));
+		orderInfoMap.put("O004", setSinOrderInfo("O004", "C2", "保養品", 3300));
+		orderInfoMap.put("O005", setSinOrderInfo("O005", "C3", "攝影機", 14999));
+	}
+
 	public String getOrderNo(int index) {
 		return String.format("O00%s", Integer.toString(index));
 	}
-	
-	public String getOrderCustMap(int index) {
-		return orderCustMap.get( getOrderNo(index)  );
-	}
-	
+
 	public String getCustNameMap(String custNo) {
-		return custNameMap.get(custNo);
-	}
-	
-	public String getOrderDescMap(int index) {
-		return orderDescMap.get( getOrderNo(index)  );
-	}
-	
-	public int getOrderAmtMap(int index) {
-		return orderAmtMap.get( getOrderNo(index)  );
+		ArrayList<?> sinCustInfoc = new ArrayList<String>();
+		sinCustInfoc = (ArrayList<?>) (custNameMap.get(custNo));
+
+		for (int index = 0; index <= sinCustInfoc.size(); index++) {
+			if (custDesc[index].equals("name")) {
+				return (String) sinCustInfoc.get(index);
+			}
+		}
+		return "";
 	}
 
 	public void getCustOrderlist() {
-		String custNo = null;
-		for(int index = 1; index <= orderCustMap.size(); index ++) {
-			custNo = getOrderCustMap(index);
-			System.out.println(custNo + "\t" + getCustNameMap(custNo) + "\t" + getOrderNo(index) + "\t" +
-					getOrderDescMap(index) + "\t" + getOrderAmtMap(index));
-		}
-	}
-	public void getCustSumAvgCost() {
-		//加總 & 紀錄筆數
-		for ( int index = 1; index <= orderAmtMap.size(); index ++) {
-			if ( !( custSumCostMap.get(getOrderCustMap(index)) == null) ) {
-				custSumCostMap.put(getOrderCustMap(index), ( getOrderAmtMap(index) + custSumCostMap.get(getOrderCustMap(index))) );
-				custOrderCountMap.put(getOrderCustMap(index), custOrderCountMap.get(getOrderCustMap(index)) + 1);
-				continue;
+		for (int index = 1; index <= orderInfoMap.size(); index++) {
+			ArrayList<?> sinOrderInfoc = new ArrayList<String>();
+			sinOrderInfoc = (ArrayList<?>) (orderInfoMap.get(getOrderNo(index)));
+
+			for (int index2 = 0; index2 < sinOrderInfoc.size(); index2++) {
+				System.out.print(sinOrderInfoc.get(index2) + "\t");
+
+				if (orderDesc[index2].equals("旅客")) {
+					System.out.print(getCustNameMap((String) sinOrderInfoc.get(index2)) + "\t");
+				}
 			}
-			custSumCostMap.put(getOrderCustMap(index), getOrderAmtMap(index));
-			custOrderCountMap.put(getOrderCustMap(index), 1);
+			System.out.println();
+
 		}
 	}
+
 	public void getCustAvgCost() {
-		getCustSumAvgCost();
-		for (String key : custSumCostMap.keySet()) {	
-			System.out.println("編號:" + key + " , 姓名: " + getCustNameMap(key) + ", 平均消費金額: " + 
-					( (float) custSumCostMap.get(key) / (float) custOrderCountMap.get(key))  );
+		int count = 0, sum = 0;
+		for (String key : custNameMap.keySet()) {
+			count = 0;
+			sum = 0;
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custNameMap.get(key));
+
+			for (int index = 0; index < sinCustInfoc.size(); index++) {
+				if (custDesc[index].equals("count")) {
+					count = (int) sinCustInfoc.get(index);
+				} else if (custDesc[index].equals("sumPrice")) {
+					sum = (int) sinCustInfoc.get(index);
+				}
+			}
+
+			System.out.println(
+					"編號:" + key + " , 姓名: " + getCustNameMap(key) + ", 平均消費金額: " + ((float) sum / (float) count));
 		}
 	}
-	public void printCustSumCost(Map<String, Integer> asMap){
-		for (String key : asMap.keySet()) {	
-			System.out.println("編號:" + key + " , 姓名: " + getCustNameMap(key) + ", 總消費金額: " + asMap.get(key)  );
+
+	public void printCustSumCost(Map<String, Integer> asMap) {
+		for (String key : asMap.keySet()) {
+			System.out.println("編號:" + key + " , 姓名: " + getCustNameMap(key) + ", 總消費金額: " + asMap.get(key));
 		}
 	}
-	
-	public void setSortDesc(String type) {
-		LinkedHashMap<String, Integer> custSortCostMap = new LinkedHashMap<String, Integer>();
-		Map<String, Integer> custSumCostCloneMap = new TreeMap<String, Integer >(custSumCostMap);
+
+	public void sort(String type) {
+		Map<String, Integer> custSumCostMap = new LinkedHashMap<String, Integer>();
+		int tempPrice = 0;
+		String tarKey = null;
+
+		for (String key : custNameMap.keySet()) {
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custNameMap.get(key));
+
+			for (int index = 0; index < sinCustInfoc.size(); index++) {
+				if (custDesc[index].equals("sumPrice") && (int) sinCustInfoc.get(index) > tempPrice) {
+					tempPrice = (int) sinCustInfoc.get(index);
+					tarKey = key;
+				}
+			}
+			custSumCostMap.put(tarKey, tempPrice);
+		}
+
+		custSumCostMap = setSort(custSumCostMap, type);
+		printCustSumCost(custSumCostMap);
+	}
+
+	public Map<String, Integer> setSort(Map<String, Integer> asMap, String type) {
+		Map<String, Integer> setSortSumCostMap = new LinkedHashMap<String, Integer>();
 		String temp;
-		for (String key1 : custSumCostCloneMap.keySet()) {
+		for (String key1 : asMap.keySet()) {
 			temp = null;
-			for (String key2 : custSumCostCloneMap.keySet()) {
-				if( ( custSumCostCloneMap.get(key1) <= custSumCostCloneMap.get(key2) && custSumCostCloneMap.get(key2) != 0 && type == "Desc") ||
-						( custSumCostCloneMap.get(key1) >= custSumCostCloneMap.get(key2) && custSumCostCloneMap.get(key2) != 0 && type == "Asc") )	{
+			for (String key2 : asMap.keySet()) {
+				if ((asMap.get(key1) <= asMap.get(key2) && asMap.get(key2) != 0 && type == "Desc")
+						|| (asMap.get(key1) >= asMap.get(key2) && asMap.get(key2) != 0 && type == "Asc")) {
 					temp = key2;
 				}
 			}
-			if (!temp.equals(null)){
-				custSortCostMap.put(temp, custSumCostCloneMap.get(temp));
-				custSumCostCloneMap.put(temp, 0);// 排序過的補0
+			if (!temp.equals(null)) {
+				setSortSumCostMap.put(temp, asMap.get(temp));
+				asMap.put(temp, 0);// 排序過的補0
 			}
 		}
-		printCustSumCost(custSortCostMap);
+
+		return setSortSumCostMap;
 	}
 }
 
-class Q6_5{
-	
-	ArrayList<String> custNoList = new ArrayList<String>();//會員名單ID
-	ArrayList<String> custNameList = new ArrayList<String>();//會員名單姓名
-	LinkedList<Integer> custSumCostList = new LinkedList<Integer>();//會員花費金額
-	LinkedList<Integer> custOrderCountList = new LinkedList<Integer>();//會員訂單數
-	
-	ArrayList<String> orderNoList = new ArrayList<String>();//訂單編號
-	ArrayList<String> orderCustNoList = new ArrayList<String>();//訂購者
-	ArrayList<String> orderDescList = new ArrayList<String>();//訂單內容
-	ArrayList<Integer> orderAmtList = new ArrayList<Integer>();//訂單金額
+class Q6_5 {
+
+	String[] orderDesc = { "訂單", "旅客", "訂購內容", "金額" };
+	String[] custDesc = { "id", "name", "count", "sumPrice" };
+	ArrayList<Object> custInfoList = new ArrayList<Object>();// 會員名單ID
+	ArrayList<Object> orderInfoList = new ArrayList<Object>();// 會員名單姓名
 
 	public void run() {
 		initList();
 		System.out.println("6-5   -----------------");
-		
+
 		System.out.println("1.用會員編號查詢會員買的商品");
 		getCustOrderDet();
 		System.out.println();
-		
+
 		System.out.println("2.算出每位會員的平均每筆消費金額");
 		getCustAvgCost();
 		System.out.println();
 		
 		System.out.println("3.依照消費總金額高到低排序");
-		setSortDesc("Desc");
+		sort("Desc");
 		System.out.println();
 		
 		System.out.println("4.依照消費總金額低到高排序");
-		setSortDesc("Asc");
+		sort("Asc");
 		System.out.println();
 	}
-	
+
 	public void initList() {
-		setCustNoList(custNoList);
-		setCustNameList(custNameList);
-		setOrderNoList(orderNoList);
-		setOrderCustNoList(orderCustNoList);
-		setOrderDescList(orderDescList);
-		setOrderAmtList(orderAmtList);
+		setOrderInfoList(orderInfoList);
+		setCustInfoList(custInfoList);
 	}
-	
-	public void setCustNoList(ArrayList<String> custNameIdList) {
-		custNameIdList.add("C1");
-		custNameIdList.add("C2");
-		custNameIdList.add("C3");
+
+	public void setCustInfoList(List<Object> custNameMap) {
+		custInfoList.add(setSinCustInfo("C1", "小Q", 0, 0));
+		custInfoList.add(setSinCustInfo("C2", "小咪", 0, 0));
+		custInfoList.add(setSinCustInfo("C3", "查理", 0, 0));
 	}
-	
-	public void setCustNameList(ArrayList<String> custNameList) {
-		custNameList.add("小Q");
-		custNameList.add("小咪");
-		custNameList.add("查理");
+
+	public void setOrderInfoList(List<Object> orderInfoMap) {
+		orderInfoList.add(setSinOrderInfo("O001", "C1", "衣服", 789));
+		orderInfoList.add(setSinOrderInfo("O002", "C1", "3C", 1999));
+		orderInfoList.add(setSinOrderInfo("O003", "C2", "遊戲", 1899));
+		orderInfoList.add(setSinOrderInfo("O004", "C2", "保養品", 3300));
+		orderInfoList.add(setSinOrderInfo("O005", "C3", "攝影機", 14999));
 	}
-	
-	public void setOrderNoList(ArrayList<String> orderNoList) {
-		orderNoList.add("O001");
-		orderNoList.add("O002");
-		orderNoList.add("O003");
-		orderNoList.add("O004");
-		orderNoList.add("O005");
-	}
-	
-	public void setOrderCustNoList(ArrayList<String> orderCustNoList) {
-		orderCustNoList.add("C1");
-		orderCustNoList.add("C1");
-		orderCustNoList.add("C2");
-		orderCustNoList.add("C2");
-		orderCustNoList.add("C3");
-	}
-	
-	public void setOrderDescList(ArrayList<String> orderDescList) {
-		orderDescList.add("衣服");
-		orderDescList.add("3C");
-		orderDescList.add("遊戲");
-		orderDescList.add("保養品");
-		orderDescList.add("攝影機");
-	}
-	
-	public void setOrderAmtList(ArrayList<Integer> orderAmtList) {
-		orderAmtList.add(789);
-		orderAmtList.add(1999);
-		orderAmtList.add(1899);
-		orderAmtList.add(3300);
-		orderAmtList.add(14999);
-	}
-	
-	
-	public int getCustNoIndex(String CustValue){
-		for ( int custIndex = 0; custIndex < custNoList.size(); custIndex ++){
-			if (custNoList.get(custIndex).equals(CustValue) ){
-				return custIndex;
+
+	public String getCustNameList(String custNo) {
+
+		for (int index = 0; index < custInfoList.size(); index++) {
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custInfoList.get(index));
+
+			for (int index2 = 0; index2 < sinCustInfoc.size(); index2++) {
+
+				if (custDesc[index2].equals("id") && sinCustInfoc.get(index2) != custNo) {
+					break;
+				}
+				if (custDesc[index2].equals("name")) {
+					return (String) sinCustInfoc.get(index2);
+				}
 			}
 		}
-		return -1;
+
+		return "";
 	}
-	
-	public String getCustNameList(int index){
-		return custNameList.get(index);
+
+	public String getOrderNo(int index) {
+		return String.format("O00%s", Integer.toString(index));
 	}
-	
-	public String getOrderCustNoList(int index){
-		return orderCustNoList.get(index);
+
+	public ArrayList<Object> setSinOrderInfo(String value1, String value2, String value3, int value4) {
+		ArrayList<Object> sinOrderInfo = new ArrayList<Object>();
+		sinOrderInfo.add(value1);
+		sinOrderInfo.add(value2);
+		sinOrderInfo.add(value3);
+		sinOrderInfo.add(value4);
+		return sinOrderInfo;
 	}
-	
-	public String getOrderNoList(int index){
-		return orderNoList.get(index);
+
+	public ArrayList<Object> setSinCustInfo(String value1, String value2, int value3, double value4) {
+		ArrayList<Object> sinCustInfo = new ArrayList<Object>();
+		sinCustInfo.add(value1);
+		sinCustInfo.add(value2);
+		int[] setOrder = getSumAmtandCustOrderCount(value1);
+
+		sinCustInfo.add(setOrder[0]);
+		sinCustInfo.add(setOrder[1]);
+
+		return sinCustInfo;
 	}
-	
-	public String getOrderDescList(int index){
-		return orderDescList.get(index);
+
+	public int[] getSumAmtandCustOrderCount(String custNo) {
+		int cnt = 0, sum = 0;
+		for (int index = 0; index < orderInfoList.size(); index++) {
+			ArrayList<?> sinOrderInfoc = new ArrayList<String>();
+			sinOrderInfoc = (ArrayList<?>) (orderInfoList.get(index));
+
+			for (int index2 = 0; index2 < sinOrderInfoc.size(); index2++) {
+				if ((orderDesc[index2].equals("旅客") && !((sinOrderInfoc.get(index2)).equals(custNo)))) {
+					break;
+				}
+
+				if (orderDesc[index2].equals("金額")) {
+					cnt += 1;
+					sum += (int) sinOrderInfoc.get(index2);
+				}
+			}
+		}
+
+		int[] rtnorder = { cnt, sum };
+		return rtnorder;
 	}
-	
-	public int getOrderAmtList(int index){
-		return orderAmtList.get(index);
-	}
-	
+
 	public void getCustOrderDet() {
-		for(int index = 0; index < orderCustNoList.size(); index ++) {
-			System.out.println(getOrderCustNoList(index) + "\t" + getCustNameList(getCustNoIndex(orderCustNoList.get(index))) + "\t" + getOrderNoList(index) + "\t" +
-					getOrderDescList(index) + "\t" + getOrderAmtList(index));
+		for (int index = 0; index < orderInfoList.size(); index++) {
+			ArrayList<?> sinOrderInfoc = new ArrayList<String>();
+			sinOrderInfoc = (ArrayList<?>) (orderInfoList.get(index));
+
+			for (int index2 = 0; index2 < sinOrderInfoc.size(); index2++) {
+				System.out.print(sinOrderInfoc.get(index2) + "\t");
+				if (orderDesc[index2].equals("旅客")) {
+					System.out.print(getCustNameList((String) sinOrderInfoc.get(index2)) + "\t");
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	public void getCustAvgCost() {
+		int count = 0, sum = 0;
+		String id = null;
+		for (int index = 0; index < custInfoList.size(); index++) {
+			count = 0;
+			sum = 0;
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custInfoList.get(index));
+
+			for (int index2 = 0; index2 < sinCustInfoc.size(); index2++) {
+				if (custDesc[index2].equals("count")) {
+					count = (int) sinCustInfoc.get(index2);
+				} else if (custDesc[index2].equals("sumPrice")) {
+					sum = (int) sinCustInfoc.get(index2);
+				} else if (custDesc[index2].equals("id")) {
+					id = (String) sinCustInfoc.get(index2);
+				}
+			}
+			System.out.println("編號:" + id + " , 姓名: " + getCustNameList(id) + ", 平均消費金額: " + ((float) sum / (float) count));
 		}
 	}
 	
-	public void setCustSumCostList(int index, int setAmt){
-		if (index == custSumCostList.size() -1) {
-			custSumCostList.remove(index);
-		}
-		custSumCostList.add(index, setAmt);		
+	public ArrayList<Integer> setSortObject(int index, int sumPrice) {
+		ArrayList<Integer> custSinSumCostList = new ArrayList<Integer>();
+		custSinSumCostList.add(index);
+		custSinSumCostList.add(sumPrice);
+		return custSinSumCostList;
 	}
 	
-	public void setCustOrderCountList(int index, int orgCount){
-		if (index == custOrderCountList.size() -1) {
-			custOrderCountList.remove(index);
-		}
-		custOrderCountList.add(index, orgCount);	
-	}
-	
-	public int getCustSumCostList(int cusIndex){
-		return custSumCostList.get(cusIndex);
-	}
-	
-	public int getCustOrderCountList(int cusIndex){
-		return custOrderCountList.get(cusIndex);
-	}
-	
-	public void getCustSumAvgCost() {
-		//加總 & 紀錄筆數
-		int cusIndex, setAmt, setCount;
-		for ( int index = 0; index < orderAmtList.size(); index ++) {
-			cusIndex = getCustNoIndex(getOrderCustNoList(index));
-			if ( cusIndex == custSumCostList.size() -1 ) {
-				setAmt = getOrderAmtList ( index ) + getCustSumCostList(cusIndex);
-				setCount = getCustOrderCountList(cusIndex) +1;
-	
-				setCustSumCostList(cusIndex, setAmt);
-				setCustOrderCountList(cusIndex, setCount);
+	public String getCustNoList(int index) {
+
+		for (int index1 = 0; index1 < custInfoList.size(); index1 ++) {
+			
+			if (index1 != index) {
 				continue;
 			}
-			setCustSumCostList(cusIndex, getOrderAmtList ( index ));
-			setCustOrderCountList(cusIndex, 1);
-		}
-	}
-	
-	public void getCustAvgCost() {
-		getCustSumAvgCost();
-		for ( int cusIndex = 0; cusIndex < custSumCostList.size(); cusIndex ++) {
-			System.out.println("編號:" + custNoList.get(cusIndex) + " , 姓名: " + getCustNameList(cusIndex) + ", 平均消費金額: " +
-					(float) getCustSumCostList(cusIndex) / (float) getCustOrderCountList(cusIndex) );
-		}
-	}
-	
-	public void printCustSumCost( ArrayList<String> asIdList, LinkedList<Integer> asCostList){
-		
-		int temp = 0;
-		for (int cusIndex = 0; cusIndex < asCostList.size(); cusIndex ++){
-			for (int index = 0; index < custNoList.size(); index++) {
-				if ( asIdList.get(cusIndex).equals(custNoList.get(index))  ) {
-					temp = index;
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custInfoList.get(index1));
+			
+			for (int index2 = 0; index2 < sinCustInfoc.size(); index2++) {
+				
+				if (custDesc[index2].equals("id")) {
+					return (String) sinCustInfoc.get(index2);
 				}
 			}
-			System.out.println("編號:" + asIdList.get(cusIndex) + " , 姓名: " + getCustNameList(temp) + ", 總消費金額: " + asCostList.get(cusIndex)  );
 		}
-		
+
+		return "";
 	}
 	
-	public void setSortDesc(String type) {
+	public void printCustSumCost(ArrayList<Object> asList, String[] asSortName ) {
 
-		LinkedList<Integer> custSortCostList = new LinkedList<Integer>();
-		ArrayList<String> custSortCostNoList = new ArrayList<String>();
-		LinkedList<Integer> custSumCostCloneList = new LinkedList<Integer>(custSumCostList);
+		for (int index = 0; index < asList.size(); index++) {
+			
+			ArrayList<Integer> tempSinInfoc = new ArrayList<Integer>();
+			tempSinInfoc = (ArrayList<Integer>) (asList.get(index));
+			
+			for (int index2 = 0; index2 < tempSinInfoc.size(); index2 ++) {
+				if (asSortName[index2].equals("index")) {
+					System.out.print("編號:" + getCustNoList(tempSinInfoc.get(index2)) + 
+									 " , 姓名: " + getCustNameList(getCustNoList(tempSinInfoc.get(index2))) );
+					
+				}else if(asSortName[index2].equals("price")) {
+					System.out.println(", 總消費金額:" + tempSinInfoc.get(index2) + "\t");
+				}
+				
+			}
+		}
 
+	}
+	
+	public void sort(String type) {
+		ArrayList<Object> custSumCostList = new ArrayList<Object>();
+		int tempPrice = 0;
+		int tarIndex = 0;
+
+		for (int index = 0; index < custInfoList.size(); index ++) {
+			ArrayList<?> sinCustInfoc = new ArrayList<String>();
+			sinCustInfoc = (ArrayList<?>) (custInfoList.get(index));
+
+			for (int index2 = 0; index2 < sinCustInfoc.size(); index2 ++) {
+				if (custDesc[index2].equals("sumPrice") && (int) sinCustInfoc.get(index2) > tempPrice) {
+					tempPrice = (int) sinCustInfoc.get(index2);
+					tarIndex = index;
+				}
+			}
+			custSumCostList.add(setSortObject(tarIndex, tempPrice));
+		}
+		
+		String [] sortName = {"index", "price"};
+		custSumCostList = setSort(custSumCostList, sortName, type);
+		printCustSumCost(custSumCostList, sortName);
+	}
+
+	public ArrayList<Object> setSort(ArrayList<Object> asList, String[] asSortName, String type) {
+		ArrayList<Object> setSortSumCostList = new ArrayList<Object>();
+		ArrayList<Integer> sinInxfoc = new ArrayList<Integer>();
+		ArrayList<Integer> sinPriceInfoc = new ArrayList<Integer>();
+		
+		//拆分
+		for (int asIndex = 0; asIndex < asList.size(); asIndex++) {
+
+			ArrayList<Integer> tempSinInfoc = new ArrayList<Integer>();
+			tempSinInfoc = (ArrayList<Integer>) (asList.get(asIndex));
+			
+			for (int index = 0; index < tempSinInfoc.size(); index ++) {
+				if( asSortName[index].equals("index") ) {
+					sinInxfoc.add(tempSinInfoc.get(index));
+				}else if (asSortName[index].equals("price")){
+					sinPriceInfoc.add(tempSinInfoc.get(index));
+				}
+			}
+		}
+			
+		//排序後組裝成 object
 		int temp;
-		for (int cusIndex = 0; cusIndex < custSumCostCloneList.size(); cusIndex ++){
+
+		for (int index = 0; index < sinPriceInfoc.size(); index ++) {
 			temp = 99;
-			for (int cusIndex2 = 0; cusIndex2 < custSumCostCloneList.size(); cusIndex2 ++){
-				
-				if ( ( custSumCostCloneList.get(cusIndex) <= custSumCostCloneList.get(cusIndex2) && custSumCostCloneList.get(cusIndex2) != 0 && type == "Desc") ||
-						( custSumCostCloneList.get(cusIndex) >= custSumCostCloneList.get(cusIndex2) && custSumCostCloneList.get(cusIndex2) != 0 && type == "Asc") )	{
-					temp = cusIndex2;
+			for (int index2 = 0; index2 < sinPriceInfoc.size(); index2 ++) {
+				if (( sinPriceInfoc.get(index) <= sinPriceInfoc.get(index2) && sinPriceInfoc.get(index2) != 0 && type == "Desc")
+						|| (sinPriceInfoc.get(index) >= sinPriceInfoc.get(index2) && sinPriceInfoc.get(index2) != 0 && type == "Asc")) {
+					temp = index2;
 				}
-			}
-			if(temp != 99){
-				custSortCostList.add( custSumCostCloneList.get(temp) );
-				custSortCostNoList.add( custNoList.get(temp));
-				custSumCostCloneList.remove(temp);
-				custSumCostCloneList.add(temp, 0);
 				
+			}
+
+			if(temp != 99){
+				setSortSumCostList.add( setSortObject( sinInxfoc.get(temp), sinPriceInfoc.get(temp)) );
+				sinPriceInfoc.remove(temp);
+				sinPriceInfoc.add(temp, 0);
 			}
 		}
-		printCustSumCost(custSortCostNoList, custSortCostList);
+	
+		return setSortSumCostList;
 	}
-	
-	
+
 }
