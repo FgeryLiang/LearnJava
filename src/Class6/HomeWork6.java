@@ -1,11 +1,7 @@
 package Class6;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -28,9 +24,7 @@ public class HomeWork6 {
 }
 
 class Q6_1 {
-	// Map<String, String> treeMap = new HashMap<String, String>();
 	LinkedHashMap<String, String> treeMap = new LinkedHashMap<String, String>();
-	// Map<String, String> treeMap = new TreeMap<String, String>();
 
 	public void run() {
 
@@ -72,63 +66,97 @@ class Q6_1 {
 }
 
 class Q6_2 {
-	LinkedList<String> arraylistId = new LinkedList<String>();
-	LinkedList<String> arraylistName = new LinkedList<String>();
+	String [] desc = {"id", "name"};
+	ArrayList<Object> arraylist = new ArrayList<Object>();
 
 	public void run() {
 
 		System.out.println("6-2   -----------------");
 		initArraylist();
 
-		modifyData(getIndex("C1"), "紅色");
+		modifyData("C1", "紅色");
 		System.out.println("第一題(List):");
 		printData();
 		System.out.println();
 
 		System.out.println("第二題(RemoveAndAddList):");
-		removeTag(getIndex("C2"));
+		removeTag("C2");
 		addTag("C4", "天天");
 		printData();
 		System.out.println();
 	}
 
 	public void initArraylist() {
-		arraylistId.add("C1");
-		arraylistId.add("C2");
-		arraylistId.add("C3");
-
-		arraylistName.add("藍色");
-		arraylistName.add("香菇");
-		arraylistName.add("小草");
+		arraylist.add(setObjectList("C1", "藍色"));
+		arraylist.add(setObjectList("C2", "香菇"));
+		arraylist.add(setObjectList("C3", "小草"));
 	}
 
-	public int getIndex(String listValue) {
-		for (int index = 0; index < arraylistId.size(); index++) {
-			if (listValue == arraylistId.get(index)) {
-				return index;
+	public ArrayList<Object> setObjectList(String value1, String value2) {
+		ArrayList<Object> sinNminf = new ArrayList<Object>();
+		sinNminf.add(value1);
+		sinNminf.add(value2);
+		return sinNminf;
+	}
+
+	public void removeTag(String id) {
+		for (int index = 0; index < arraylist.size(); index++) {
+
+			ArrayList<String> tempSinInfoc = new ArrayList<String>();
+			tempSinInfoc = (ArrayList<String>) (arraylist.get(index));
+
+			for (int index2 = 0; index2 < tempSinInfoc.size(); index2 ++) {
+				if( desc[index2].equals("id") ) {
+					if ( tempSinInfoc.get(index2).equals(id) ) {
+						continue;
+					}else{
+						break;
+					}
+				}
+				arraylist.remove(index);
+				
 			}
 		}
-		return -1;
 	}
 
-	public void removeTag(int index) {
-		arraylistId.remove(index);
-		arraylistName.remove(index);
+	public void addTag(String id, String name) {
+		arraylist.add(setObjectList(id, name));// 加入
 	}
 
-	public void addTag(String id, String data) {
-		arraylistId.add(id);
-		arraylistName.add(data);// 加入
-	}
+	public void modifyData(String id, String name) {
 
-	public void modifyData(int index, String value) {
-		arraylistName.remove(index);
-		arraylistName.add(index, value);// 覆蓋
+		for (int index = 0; index < arraylist.size(); index++) {
+
+			ArrayList<String> tempSinInfoc = new ArrayList<String>();
+			tempSinInfoc = (ArrayList<String>) (arraylist.get(index));
+
+			for (int index2 = 0; index2 < tempSinInfoc.size(); index2 ++) {
+				if( desc[index2].equals("id") ) {
+					if ( tempSinInfoc.get(index2).equals(id) ) {
+						continue;
+					}else{
+						break;
+					}
+				}
+				arraylist.remove(index);
+				arraylist.add(setObjectList(id, name));// 覆蓋
+				
+			}
+		}
 	}
 
 	public void printData() {
-		for (int index = 0; index < arraylistId.size(); index++) {
-			System.out.println("key:" + arraylistId.get(index) + " , value: " + arraylistName.get(index));
+		for (int index = 0; index < arraylist.size(); index++) {
+			ArrayList<String> tempSinInfoc = new ArrayList<String>();
+			tempSinInfoc = (ArrayList<String>) (arraylist.get(index));
+			for (int index2 = 0; index2 < tempSinInfoc.size(); index2 ++){
+				if( desc[index2].equals("id") ){
+					System.out.print("key:" + tempSinInfoc.get(index2) + "\t");
+				}else if(desc[index2].equals("name")){
+					System.out.print("value:" + tempSinInfoc.get(index2) + "\t");
+				}
+			}
+			System.out.println();
 		}
 	}
 
