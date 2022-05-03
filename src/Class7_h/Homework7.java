@@ -9,6 +9,7 @@ public class Homework7 {
 	public static void main(String[] args) {
 		Q7_1 Q7_Ex = new Q7_Ex();
 		Q7_Ex.run();
+		
 	}
 }
 
@@ -20,7 +21,7 @@ interface Q7Action {
 }
 
 class Q7_Ex extends Q7_1 {
-	
+
 	public void initMenuData() {
 		//更改Menu項目
 		menuDate.put( 1, new Menu("紅茶", "500", "700", "129.8", "186.1", "錫蘭紅茶，產地康提 (Kandy)", 30, 35));
@@ -29,9 +30,10 @@ class Q7_Ex extends Q7_1 {
 		menuDate.put( 4, new Menu("青茶", "500", "700", "0", "0", "產地日本", 25, 30));
 		menuDate.put( 5, new Menu("高山茶", "500", "700", "10", "14", "產地台灣原始森林台地", 30, 35));
 		menuDate.put( 6, new Menu("水果茶", "500", "700", "290", "382", "產地台灣", 55, 70));
+		menuDate.put( 7, new Menu("仙草凍紅茶", "500", "700", "150", "258", "手工仙草，錫蘭紅茶，產地康提 (Kandy)", 55, 65));
+		menuDate.put( 8, new Menu("仙草凍乃茶", "500", "700", "353", "475", "手工仙草，奶茶產地法國", 60, 70));
 	}
 	
-	@Override
 	public void searchOrder() {
 		//更改熱量計算方式
 		String custNm;
@@ -56,7 +58,6 @@ class Q7_Ex extends Q7_1 {
 		System.out.println();
 	}
 
-	@Override
 	public void createMenu() {
 		String LoopYn = "Y", chooseType = null;
 		
@@ -82,6 +83,7 @@ class Q7_Ex extends Q7_1 {
 		}
 		System.out.print("結束!" );
 	}
+	
 	//更改重新查詢機制
 	public void searchOrderLoop() {
 		String LoopYn = "Y";
@@ -119,21 +121,12 @@ abstract class Q7_1 implements Q7Action{
 	}
 	
 	public void initMenuData() {
-		menuDate.put( 1, new Menu("白玉歐蕾", "500", "700", "395", "443", new menuDesc().getDrinkDesc1(), 50, 60));
-		menuDate.put( 2, new Menu("胭脂多多", "500", "700", "320", "407", new menuDesc().getDrinkDesc2(), 45, 55));
-		menuDate.put( 3, new Menu("雪藏紅茶", "500", "700", "287", "377", new menuDesc().getDrinkDesc3(), 50, 60));
-		menuDate.put( 4, new Menu("春梅冰茶", "500", "700", "257", "356", new menuDesc().getDrinkDesc4(), 40, 50));
-		menuDate.put( 5, new Menu("冷露歐蕾", "500", "700", "221", "307", new menuDesc().getDrinkDesc5(), 45, 55));
-		menuDate.put( 6, new Menu("熟成歐蕾", "500", "700", "258", "311", new menuDesc().getDrinkDesc6(), 45, 55));
-		menuDate.put( 7, new Menu("雪花冷露", "500", "700", "176", "247", new menuDesc().getDrinkDesc7(), 30, 35));
-		menuDate.put( 8, new Menu("熟成冷露", "500", "700", "155", "211", new menuDesc().getDrinkDesc8(), 30, 35));
-		menuDate.put( 9, new Menu("春芽冷露", "500", "700", "135", "211", new menuDesc().getDrinkDesc9(), 30, 35));
-		menuDate.put(10, new Menu("熟成紅茶", "500", "700", "180", "200", new menuDesc().getDrinkDesc10(), 30, 35));
-		menuDate.put(11, new Menu("麗春紅茶", "500", "700", "180", "200", new menuDesc().getDrinkDesc11(), 30, 35));
-		menuDate.put(12, new Menu("胭脂紅茶", "500", "700", "180", "200", new menuDesc().getDrinkDesc12(), 40, 45));
-		menuDate.put(13, new Menu("太妃紅茶", "500", "700", "161", "182", new menuDesc().getDrinkDesc13(), 35, 40));
-		menuDate.put(14, new Menu("春芽綠茶", "500", "700", "160", "180", new menuDesc().getDrinkDesc14(), 30, 35));
-		menuDate.put(15, new Menu("熟成檸果", "500", "700", "168", "300", new menuDesc().getDrinkDesc15(), 55, 65));
+		menuDate.put( 1, new Menu("紅茶", "500", "700", "129.8", "186.1", "錫蘭紅茶，產地康提 (Kandy)", 30, 35));
+		menuDate.put( 2, new Menu("薰衣草奶茶", "500", "700", "320", "407", "產地法國",  45, 55));
+		menuDate.put( 3, new Menu("綠茶", "500", "700", "115", "211", "產地台灣 三峽", 30, 35));
+		menuDate.put( 4, new Menu("青茶", "500", "700", "0", "0", "產地日本", 25, 30));
+		menuDate.put( 5, new Menu("高山茶", "500", "700", "10", "14", "產地台灣原始森林台地", 30, 35));
+		menuDate.put( 6, new Menu("水果茶", "500", "700", "290", "382", "產地台灣", 55, 70));
 	}
 	
 	public void initSweetMap() {
@@ -228,17 +221,17 @@ abstract class Q7_1 implements Q7Action{
 		
 		System.out.print("請輸入餐點序號( 0:退出 ):");
 		num = scanner.nextInt();
-		if (num == 0) {
+		if ( !checkArgument(num, menuDate) ) {
 			return ;
 		}
 
-		System.out.print("請輸入餐點容量\t(");
+		System.out.print("請輸入餐點杯量\t(");
 		for (int key : capMap.keySet()) {
 			System.out.print(key + "." + capMap.get(key).getCapNm() + "\t");
 		}
 		System.out.print(" 0:退出 ) :" );
 		cap = scanner.nextInt();
-		if (cap == 0) {
+		if ( !checkArgument(cap, capMap) ) {
 			return ;
 		}
 		
@@ -248,7 +241,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		swe = scanner.nextInt();
-		if (swe == 0) {
+		if ( !checkArgument(swe, sweetMap) ) {
 			return ;
 		}
 
@@ -258,7 +251,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		ice = scanner.nextInt();
-		if (ice == 0) {
+		if ( !checkArgument(ice, IceMap) ) {
 			return ;
 		}
 
@@ -276,6 +269,17 @@ abstract class Q7_1 implements Q7Action{
 		
 
 		
+	}
+	
+	public boolean checkArgument(int argu, Map<Integer, ?> asMap) {
+		if (argu == 0) {
+			System.out.println("回上一層");
+			return false;
+		}else if (argu > asMap.size()) {
+			System.out.println("找不到品項，請重新執行");
+			return false;
+		}
+		return true;
 	}
 	
 	public void searchOrder() {
@@ -488,71 +492,5 @@ class capType {
 	public void setCap(int cap) {
 		this.cap = cap;
 	}
-	
-}
-
-class menuDesc {
-	private String drinkDesc1  = "台灣手搖飲不可或缺的經典——珍珠鮮奶茶。軟嫩嚼感的白玉珍珠，恰似摩登女子的珍珠首飾，以奢華感獨領風潮。與熟成歐蕾完美結合，口感厚實而層次豐富，是一場難以忘懷的味覺饗宴。";
-	private String drinkDesc2  = "以粉色水蜜桃呼應擁有美妙歌聲的「胖丁」角色，蜜桃韻味為基底的胭脂紅茶，加入酸甜滋味恰如其分的養樂多，勾起甜而不膩的兒時回憶，伴隨著玫瑰與茉莉花香的恬淡，如同陶醉沈浸於純淨的音符之中，如初而美好。";
-	private String drinkDesc3  = "白雪融於紅茶中而蔓延，厚實的茶韻與冰淇淋的奶甜相互交織，逐漸化開成香濃醇和的奶茶。綿綿情意浸潤於唇齒之間，響起一首苦情男女的老歌，花落紅塵的情感交雜，勾人心魂的萬千情愫。";
-	private String drinkDesc4  = "春梅與冬瓜的相遇，好比舅舅的古著襯衫與耀金項鍊，花漾點綴的70年代感。純熟煉製的冬瓜，配上鮮酸柔滑的梅子，將酸甜爽口的滋味層層堆疊，懷舊風情令人醉心。";
-	private String drinkDesc5  = "冬瓜與濃醇鮮奶一絲一著、輕巧地流露於唇齒間，雅緻的氣味宛如裁縫女子手中的針線，絲絲入扣地編織交纏，飲啜之間伴隨期盼歸來的情感，一股熟悉的奶香與甜香。";
-	private String drinkDesc6  = "渲染漸變的茶色，猶如街頭嬉皮風趣的男子，口中恣意地哼著音階。濃郁的紅茶香，本是味覺記憶中的絕品，與溫順甘醇的鮮奶兩相平衡，為奶茶的底蘊更添一股味蕾衝擊，絲滑細膩使人覺醒。";
-	private String drinkDesc7  = "出於精煉的冬瓜，經歲月的火侯，成就獨有的韻味及香氣，彷彿古厝裡安然自得、望著懷舊時鐘的老奶奶，一會兒迎著藺草扇起的微風、配著收音機，享受溫煦的午後人生。";
-	private String drinkDesc8  = "冬瓜與紅茶的極致特調，慢火入味的冬瓜香氣將清沁滑順的紅茶帶入另一種層次。回憶起於雨煙橋下抽著煙斗、曾經年少的阿公，在舊識中迂迴的嫵媚，作為生活與樸實的調和劑。";
-	private String drinkDesc9  = "春芽冷露是一股耐人尋味的質感，如同愛好茶酒和詩詞的阿伯。冬瓜陳年的尾韻，於茶葉清甜圓潤的餘韻下回甘，兩者所釋放的渾厚香氣，尋尋覓覓使人意猶未盡，適合與文學一同啜飲。";
-	private String drinkDesc10 = "木質帶熟果香調的風味，流露熟齡男子的沈穩氣息，低調而迷人。嚴選自斯里蘭卡產區之茶葉，帶有濃郁果香及醇厚桂圓香氣；與肉類料理一同品嚐，得以化解舌尖上所殘留的油膩感。";
-	private String drinkDesc11 = "淡雅輕盈的花香調，可比嬌豔欲滴的罌粟紅花，散發名門閨秀的氣質，優雅而令人傾心。取自罕見的斯里蘭卡中高海拔產區茶葉，帶清爽孤傲的花香；搭配海鮮料理享用，為中和腥羶味的首選。";
-	private String drinkDesc12 = "恬淡的果香調與一抹蜜桃風味，伴隨玫瑰與茉莉花香的情蜜纏綿，好似唇抹胭脂的綺麗女子。清新的紅茶如髮簪鑲嵌的金絲紋理，將60年代華洋集於一身的氛圍，化為迷人的戀舊意識。";
-	private String drinkDesc13 = "咖啡與紅茶的絕妙搭配—— 鮮明風味於口中融合暈染，描繪出復古情懷的文青少女，在Cafe裡敲著打字機、傳來紙張與墨水帶的振振聲響。咖啡豆的淬煉注入紅茶的芬芳，淡柔飄散的麥香，所謂「復刻經典」。";
-	private String drinkDesc14 = "縱身綠叢、提筆描繪的青山少年，在春滿四溢的山林中擁抱自然、探索枝芽於舌尖的渴望。萃取自台灣綠茶，蘊含繁茂枝葉所飽存的風土，初嚐甘甜圓潤與低苦澀，青翠欲滴即不絕於口。";
-	private String drinkDesc15 = "如同愛情小品中的少女，帶著初戀的羞澀與心上人赴約，配上酸甜濃郁的檸檬蛋糕，在靦腆的午後時光綻放少女情懷。整顆新鮮檸檬浸漬於茶中，輕盈爽口而純淨，不多不少7分糖，甜意、情意剛剛好。";
-	
-	public String getDrinkDesc1() {
-		return drinkDesc1;
-	}
-	public String getDrinkDesc2() {
-		return drinkDesc2;
-	}
-	public String getDrinkDesc3() {
-		return drinkDesc3;
-	}
-	public String getDrinkDesc4() {
-		return drinkDesc4;
-	}
-	public String getDrinkDesc5() {
-		return drinkDesc5;
-	}
-	public String getDrinkDesc6() {
-		return drinkDesc6;
-	}
-	public String getDrinkDesc7() {
-		return drinkDesc7;
-	}
-	public String getDrinkDesc8() {
-		return drinkDesc8;
-	}
-	public String getDrinkDesc9() {
-		return drinkDesc9;
-	}
-	public String getDrinkDesc10() {
-		return drinkDesc10;
-	}
-	public String getDrinkDesc11() {
-		return drinkDesc11;
-	}
-	public String getDrinkDesc12() {
-		return drinkDesc12;
-	}
-	public String getDrinkDesc13() {
-		return drinkDesc13;
-	}
-	public String getDrinkDesc14() {
-		return drinkDesc14;
-	}
-	public String getDrinkDesc15() {
-		return drinkDesc15;
-	}
-	
 	
 }
