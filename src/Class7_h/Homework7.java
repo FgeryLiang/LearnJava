@@ -16,6 +16,7 @@ public class Homework7 {
 interface Q7Action {
 	public void initMenuData();
 	public void searchOrder();
+	public void createMenu();
 }
 
 class Q7_Ex extends Q7_1 {
@@ -219,37 +220,52 @@ abstract class Q7_1 implements Q7Action{
 		int num, ice, swe, cap;
 		String custNm;
 
-		System.out.print("請輸入顧客姓名:");
+		System.out.print("請輸入顧客姓名( 0:退出 ):");
 		custNm = scanner.next();
+		if (custNm.equals("0")) {
+			return ;
+		}
 		
-		System.out.print("請輸入餐點序號:");
+		System.out.print("請輸入餐點序號( 0:退出 ):");
 		num = scanner.nextInt();
+		if (num == 0) {
+			return ;
+		}
 
 		System.out.print("請輸入餐點容量\t(");
 		for (int key : capMap.keySet()) {
 			System.out.print(key + "." + capMap.get(key).getCapNm() + "\t");
 		}
-		System.out.print(") :" );
+		System.out.print(" 0:退出 ) :" );
 		cap = scanner.nextInt();
+		if (cap == 0) {
+			return ;
+		}
 		
 		System.out.print("請輸入甜度\t(" );
 		for (int key : sweetMap.keySet()) {
 			System.out.print(key + "." + sweetMap.get(key).getSweetDesc() + "\t");
 		}
-		System.out.print(") :" );
+		System.out.print(" 0:退出 ) :" );
 		swe = scanner.nextInt();
+		if (swe == 0) {
+			return ;
+		}
 
 		System.out.print("請輸入冰度\t(" );
 		for (int key : IceMap.keySet()) {
 			System.out.print(key + "." + IceMap.get(key).getIceDesc() + "\t");
 		}
-		System.out.print(") :" );
+		System.out.print(" 0:退出 ) :" );
 		ice = scanner.nextInt();
+		if (ice == 0) {
+			return ;
+		}
 
 		orderRow ++;
 		createOrder(String.format("0000%s", String.valueOf(orderRow)), custNm, num, cap, swe, ice);
 		
-	    System.out.printf("您點選的餐點為: %s, %s, %s, %s, %d !", 
+	    System.out.printf("您點選的餐點為: %s, %s, %s, %s, $%d !", 
 	    			menuDate.get(num).getName(),  
 	    			capMap.get(cap).getCapNm(), 
 	    			sweetMap.get(swe).getSweetDesc() , 
