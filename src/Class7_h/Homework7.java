@@ -15,21 +15,21 @@ public class Homework7 {
 
 
 interface Q7Action {
-	public void InitMenuData();
-	public void SearchOrder();
-	public void CreateMenu();
+	public void initMenuData();
+	public void searchOrder();
+	public void createMenu();
 }
 
 class Q7_Ex extends Q7_1  {
 
-	public void InitMenuData() {
-		super.InitMenuData();
+	public void initMenuData() {
+		super.initMenuData();
 		//更改Menu項目
 		menuDate.put( 7, new Menu("仙草凍紅茶", "500", "700", "150", "258", "手工仙草，錫蘭紅茶，產地康提 (Kandy)", 55, 65));
 		menuDate.put( 8, new Menu("仙草凍乃茶", "500", "700", "353", "475", "手工仙草，奶茶產地法國", 60, 70));
 	}
 	
-	public void SearchOrder() {
+	public void searchOrder() {
 		//更改熱量計算方式
 		String custNm;
 		System.out.print("請輸入顧客姓名:");
@@ -53,7 +53,7 @@ class Q7_Ex extends Q7_1  {
 		System.out.println();
 	}
 
-	public void CreateMenu() {
+	public void createMenu() {
 		String LoopYn = "Y", chooseType = null;
 		
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
@@ -62,11 +62,11 @@ class Q7_Ex extends Q7_1  {
 			
 			switch (chooseType) {
 				case "1":
-					ShowMenu();
-					OrderMenu();
+					showMenu();
+					orderMenu();
 					break;
 				case "2":
-					SearchOrderLoop();
+					searchOrderLoop();
 					break;
 			}
 			System.out.print("是否繼續執行 (Y: 是  N :否):" );
@@ -80,10 +80,10 @@ class Q7_Ex extends Q7_1  {
 	}
 	
 	//更改重新查詢機制
-	public void SearchOrderLoop() {
+	public void searchOrderLoop() {
 		String LoopYn = "Y";
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
-			SearchOrder();
+			searchOrder();
 			System.out.print("是否繼續查詢 (Y: 是  N :否):" );
 			LoopYn = scanner.next();
 			if ( !LoopYn.equalsIgnoreCase("Y") && !LoopYn.equalsIgnoreCase("N")) {
@@ -101,23 +101,23 @@ abstract class Q7_1 implements Q7Action{
 	
 	//Menu初始化
 	Map<Integer, Menu> menuDate = new LinkedHashMap<Integer, Menu>() ;
-	Map<Integer, orderData> orderMap = new LinkedHashMap<Integer, orderData>() ;
-	Map<Integer, sweetRange> sweetMap = new LinkedHashMap<Integer, sweetRange>() ;
+	Map<Integer, OrderData> orderMap = new LinkedHashMap<Integer, OrderData>() ;
+	Map<Integer, SweetRange> sweetMap = new LinkedHashMap<Integer, SweetRange>() ;
 	Map<Integer, IceRange> IceMap = new LinkedHashMap<Integer, IceRange>() ;
-	Map<Integer, capType> capMap = new LinkedHashMap<Integer, capType>() ;
+	Map<Integer, CapType> capMap = new LinkedHashMap<Integer, CapType>() ;
 	int orderRow = 0;
 	
 	Scanner scanner = new Scanner(System.in);
 	
 	public void Run() {
-		InitMenuData();
-		InitSweetMap();
-		InitIceMap();
-		InitCapMap();
-		CreateMenu();
+		initMenuData();
+		initSweetMap();
+		initIceMap();
+		initCapMap();
+		createMenu();
 	}
 	
-	public void InitMenuData() {
+	public void initMenuData() {
 		menuDate.put( 1, new Menu("紅茶", "500", "700", "129.8", "186.1", "錫蘭紅茶，產地康提 (Kandy)", 30, 35));
 		menuDate.put( 2, new Menu("薰衣草奶茶", "500", "700", "320", "407", "產地法國",  45, 55));
 		menuDate.put( 3, new Menu("綠茶", "500", "700", "115", "211", "產地台灣 三峽", 30, 35));
@@ -126,17 +126,17 @@ abstract class Q7_1 implements Q7Action{
 		menuDate.put( 6, new Menu("水果茶", "500", "700", "290", "382", "產地台灣", 55, 70));
 	}
 	
-	public void InitSweetMap() {
-		sweetMap.put(1, new sweetRange("無糖"));
-		sweetMap.put(2, new sweetRange("一分糖"));
-		sweetMap.put(3, new sweetRange("二分糖"));
-		sweetMap.put(4, new sweetRange("微糖"));
-		sweetMap.put(5, new sweetRange("半糖"));
-		sweetMap.put(6, new sweetRange("少糖"));
-		sweetMap.put(7, new sweetRange("正常糖"));
+	public void initSweetMap() {
+		sweetMap.put(1, new SweetRange("無糖"));
+		sweetMap.put(2, new SweetRange("一分糖"));
+		sweetMap.put(3, new SweetRange("二分糖"));
+		sweetMap.put(4, new SweetRange("微糖"));
+		sweetMap.put(5, new SweetRange("半糖"));
+		sweetMap.put(6, new SweetRange("少糖"));
+		sweetMap.put(7, new SweetRange("正常糖"));
 	}
 	
-	public void InitIceMap() {
+	public void initIceMap() {
 		IceMap.put(1, new IceRange("熱"));
 		IceMap.put(2, new IceRange("溫"));
 		IceMap.put(3, new IceRange("常溫"));
@@ -147,12 +147,12 @@ abstract class Q7_1 implements Q7Action{
 		IceMap.put(8, new IceRange("正常冰"));
 	}
 	
-	public void InitCapMap() {
-		capMap.put(1, new capType("大", 700));
-		capMap.put(2, new capType("中", 500));
+	public void initCapMap() {
+		capMap.put(1, new CapType("大", 700));
+		capMap.put(2, new CapType("中", 500));
 	}
 	
-	public void ShowMenu() {
+	public void showMenu() {
 		System.out.print("\t名稱 " + "\t" + "價格  \t" + "中" + "/" + "大");
 		System.out.print("\t\t");
 		System.out.print("\t名稱 " + "\t" + "價格  \t" + "中" + "/" + "大");
@@ -173,14 +173,14 @@ abstract class Q7_1 implements Q7Action{
 		System.out.println();
 	}
 	
-	public void CreateOrder(String orderId, String custNm, int num, int cap, int swe, int ice) {
-		orderMap.put( orderRow, new orderData( 
+	public void createOrder(String orderId, String custNm, int num, int cap, int swe, int ice) {
+		orderMap.put( orderRow, new OrderData( 
 				String.format("0000%s", String.valueOf(orderRow) ),
 				custNm, num, cap, swe, ice, 
 				( capMap.get(cap).getCapNm().equals("大") ? menuDate.get(num).getBigPrice() : menuDate.get(num).getMediuPrice()) ) );
 	}
 	
-	public void CreateMenu() {
+	public void createMenu() {
 		String LoopYn = "Y", chooseType = null;
 		
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
@@ -189,11 +189,11 @@ abstract class Q7_1 implements Q7Action{
 			
 			switch (chooseType) {
 				case "1":
-					ShowMenu();
-					OrderMenu();
+					showMenu();
+					orderMenu();
 					break;
 				case "2":
-					SearchOrder();
+					searchOrder();
 					break;
 			}
 			System.out.print("是否繼續執行 (Y: 是  N :否):" );
@@ -206,7 +206,7 @@ abstract class Q7_1 implements Q7Action{
 		System.out.print("結束!" );
 	}
 	
-	public void OrderMenu() {
+	public void orderMenu() {
 		int num, ice, swe, cap;
 		String custNm;
 
@@ -218,7 +218,7 @@ abstract class Q7_1 implements Q7Action{
 		
 		System.out.print("請輸入餐點序號( 0:退出 ):");
 		num = scanner.nextInt();
-		if ( !CheckArgument(num, menuDate) ) {
+		if ( !checkArgument(num, menuDate) ) {
 			return ;
 		}
 
@@ -228,7 +228,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		cap = scanner.nextInt();
-		if ( !CheckArgument(cap, capMap) ) {
+		if ( !checkArgument(cap, capMap) ) {
 			return ;
 		}
 		
@@ -238,7 +238,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		swe = scanner.nextInt();
-		if ( !CheckArgument(swe, sweetMap) ) {
+		if ( !checkArgument(swe, sweetMap) ) {
 			return ;
 		}
 
@@ -248,12 +248,12 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		ice = scanner.nextInt();
-		if ( !CheckArgument(ice, IceMap) ) {
+		if ( !checkArgument(ice, IceMap) ) {
 			return ;
 		}
 
 		orderRow ++;
-		CreateOrder(String.format("0000%s", String.valueOf(orderRow)), custNm, num, cap, swe, ice);
+		createOrder(String.format("0000%s", String.valueOf(orderRow)), custNm, num, cap, swe, ice);
 		
 	    System.out.printf("您點選的餐點為: %s, %s, %s, %s, $%d !", 
 	    			menuDate.get(num).getName(),  
@@ -268,7 +268,7 @@ abstract class Q7_1 implements Q7Action{
 		
 	}
 	
-	public boolean CheckArgument(int argu, Map<Integer, ?> asMap) {
+	public boolean checkArgument(int argu, Map<Integer, ?> asMap) {
 		if (argu == 0) {
 			System.out.println("回上一層");
 			return false;
@@ -279,7 +279,7 @@ abstract class Q7_1 implements Q7Action{
 		return true;
 	}
 	
-	public void SearchOrder() {
+	public void searchOrder() {
 		String custNm;
 		System.out.print("請輸入顧客姓名:");
 		custNm = scanner.next();
@@ -372,11 +372,11 @@ class Menu {
 	
 }
 
-class orderData {
+class OrderData {
 	String orderId, orderCustNm ;
 	int orderMenuId, orderCap, orderSwe, orderIce, orderAmt;
 	
-	public orderData(String orderId, String orderCustNm, int orderMenuId, int orderCap, int orderSwe, int orderIce,
+	public OrderData(String orderId, String orderCustNm, int orderMenuId, int orderCap, int orderSwe, int orderIce,
 			int orderAmt) {
 		super();
 		this.orderId = orderId;
@@ -434,10 +434,10 @@ class orderData {
 	
 }
 
-class sweetRange {
+class SweetRange {
 	String sweetDesc;
 
-	public sweetRange(String sweetDesc) {
+	public SweetRange(String sweetDesc) {
 		super();
 		this.sweetDesc = sweetDesc;
 	}
@@ -468,11 +468,11 @@ class IceRange{
 	}
 }
 
-class capType {
+class CapType {
 	String capNm;
 	int cap;
 	
-	public capType(String capNm, int cap) {
+	public CapType(String capNm, int cap) {
 		super();
 		this.capNm = capNm;
 		this.cap = cap;
