@@ -8,33 +8,28 @@ import java.util.Scanner;
 public class Homework7 {
 	public static void main(String[] args) {
 		Q7_1 Q7_Ex = new Q7_Ex();
-		Q7_Ex.run();
+		Q7_Ex.Run();
 		
 	}
 }
 
 
 interface Q7Action {
-	public void initMenuData();
-	public void searchOrder();
-	public void createMenu();
+	public void InitMenuData();
+	public void SearchOrder();
+	public void CreateMenu();
 }
 
-class Q7_Ex extends Q7_1 {
+class Q7_Ex extends Q7_1  {
 
-	public void initMenuData() {
+	public void InitMenuData() {
+		super.InitMenuData();
 		//更改Menu項目
-		menuDate.put( 1, new Menu("紅茶", "500", "700", "129.8", "186.1", "錫蘭紅茶，產地康提 (Kandy)", 30, 35));
-		menuDate.put( 2, new Menu("薰衣草奶茶", "500", "700", "320", "407", "產地法國",  45, 55));
-		menuDate.put( 3, new Menu("綠茶", "500", "700", "115", "211", "產地台灣 三峽", 30, 35));
-		menuDate.put( 4, new Menu("青茶", "500", "700", "0", "0", "產地日本", 25, 30));
-		menuDate.put( 5, new Menu("高山茶", "500", "700", "10", "14", "產地台灣原始森林台地", 30, 35));
-		menuDate.put( 6, new Menu("水果茶", "500", "700", "290", "382", "產地台灣", 55, 70));
 		menuDate.put( 7, new Menu("仙草凍紅茶", "500", "700", "150", "258", "手工仙草，錫蘭紅茶，產地康提 (Kandy)", 55, 65));
 		menuDate.put( 8, new Menu("仙草凍乃茶", "500", "700", "353", "475", "手工仙草，奶茶產地法國", 60, 70));
 	}
 	
-	public void searchOrder() {
+	public void SearchOrder() {
 		//更改熱量計算方式
 		String custNm;
 		System.out.print("請輸入顧客姓名:");
@@ -58,7 +53,7 @@ class Q7_Ex extends Q7_1 {
 		System.out.println();
 	}
 
-	public void createMenu() {
+	public void CreateMenu() {
 		String LoopYn = "Y", chooseType = null;
 		
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
@@ -67,11 +62,11 @@ class Q7_Ex extends Q7_1 {
 			
 			switch (chooseType) {
 				case "1":
-					showMenu();
-					orderMenu();
+					ShowMenu();
+					OrderMenu();
 					break;
 				case "2":
-					searchOrderLoop();
+					SearchOrderLoop();
 					break;
 			}
 			System.out.print("是否繼續執行 (Y: 是  N :否):" );
@@ -85,10 +80,10 @@ class Q7_Ex extends Q7_1 {
 	}
 	
 	//更改重新查詢機制
-	public void searchOrderLoop() {
+	public void SearchOrderLoop() {
 		String LoopYn = "Y";
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
-			searchOrder();
+			SearchOrder();
 			System.out.print("是否繼續查詢 (Y: 是  N :否):" );
 			LoopYn = scanner.next();
 			if ( !LoopYn.equalsIgnoreCase("Y") && !LoopYn.equalsIgnoreCase("N")) {
@@ -97,6 +92,8 @@ class Q7_Ex extends Q7_1 {
 			System.out.println();
 		}
 	}
+
+
 }
 
 
@@ -112,15 +109,15 @@ abstract class Q7_1 implements Q7Action{
 	
 	Scanner scanner = new Scanner(System.in);
 	
-	public void run() {
-		initMenuData();
-		initSweetMap();
-		initIceMap();
-		initCapMap();
-		createMenu();
+	public void Run() {
+		InitMenuData();
+		InitSweetMap();
+		InitIceMap();
+		InitCapMap();
+		CreateMenu();
 	}
 	
-	public void initMenuData() {
+	public void InitMenuData() {
 		menuDate.put( 1, new Menu("紅茶", "500", "700", "129.8", "186.1", "錫蘭紅茶，產地康提 (Kandy)", 30, 35));
 		menuDate.put( 2, new Menu("薰衣草奶茶", "500", "700", "320", "407", "產地法國",  45, 55));
 		menuDate.put( 3, new Menu("綠茶", "500", "700", "115", "211", "產地台灣 三峽", 30, 35));
@@ -129,7 +126,7 @@ abstract class Q7_1 implements Q7Action{
 		menuDate.put( 6, new Menu("水果茶", "500", "700", "290", "382", "產地台灣", 55, 70));
 	}
 	
-	public void initSweetMap() {
+	public void InitSweetMap() {
 		sweetMap.put(1, new sweetRange("無糖"));
 		sweetMap.put(2, new sweetRange("一分糖"));
 		sweetMap.put(3, new sweetRange("二分糖"));
@@ -139,7 +136,7 @@ abstract class Q7_1 implements Q7Action{
 		sweetMap.put(7, new sweetRange("正常糖"));
 	}
 	
-	public void initIceMap() {
+	public void InitIceMap() {
 		IceMap.put(1, new IceRange("熱"));
 		IceMap.put(2, new IceRange("溫"));
 		IceMap.put(3, new IceRange("常溫"));
@@ -150,12 +147,12 @@ abstract class Q7_1 implements Q7Action{
 		IceMap.put(8, new IceRange("正常冰"));
 	}
 	
-	public void initCapMap() {
+	public void InitCapMap() {
 		capMap.put(1, new capType("大", 700));
 		capMap.put(2, new capType("中", 500));
 	}
 	
-	public void showMenu() {
+	public void ShowMenu() {
 		System.out.print("\t名稱 " + "\t" + "價格  \t" + "中" + "/" + "大");
 		System.out.print("\t\t");
 		System.out.print("\t名稱 " + "\t" + "價格  \t" + "中" + "/" + "大");
@@ -176,14 +173,14 @@ abstract class Q7_1 implements Q7Action{
 		System.out.println();
 	}
 	
-	public void createOrder(String orderId, String custNm, int num, int cap, int swe, int ice) {
+	public void CreateOrder(String orderId, String custNm, int num, int cap, int swe, int ice) {
 		orderMap.put( orderRow, new orderData( 
 				String.format("0000%s", String.valueOf(orderRow) ),
 				custNm, num, cap, swe, ice, 
 				( capMap.get(cap).getCapNm().equals("大") ? menuDate.get(num).getBigPrice() : menuDate.get(num).getMediuPrice()) ) );
 	}
 	
-	public void createMenu() {
+	public void CreateMenu() {
 		String LoopYn = "Y", chooseType = null;
 		
 		while ( !LoopYn.equalsIgnoreCase("N") ) {
@@ -192,11 +189,11 @@ abstract class Q7_1 implements Q7Action{
 			
 			switch (chooseType) {
 				case "1":
-					showMenu();
-					orderMenu();
+					ShowMenu();
+					OrderMenu();
 					break;
 				case "2":
-					searchOrder();
+					SearchOrder();
 					break;
 			}
 			System.out.print("是否繼續執行 (Y: 是  N :否):" );
@@ -209,7 +206,7 @@ abstract class Q7_1 implements Q7Action{
 		System.out.print("結束!" );
 	}
 	
-	public void orderMenu() {
+	public void OrderMenu() {
 		int num, ice, swe, cap;
 		String custNm;
 
@@ -221,7 +218,7 @@ abstract class Q7_1 implements Q7Action{
 		
 		System.out.print("請輸入餐點序號( 0:退出 ):");
 		num = scanner.nextInt();
-		if ( !checkArgument(num, menuDate) ) {
+		if ( !CheckArgument(num, menuDate) ) {
 			return ;
 		}
 
@@ -231,7 +228,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		cap = scanner.nextInt();
-		if ( !checkArgument(cap, capMap) ) {
+		if ( !CheckArgument(cap, capMap) ) {
 			return ;
 		}
 		
@@ -241,7 +238,7 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		swe = scanner.nextInt();
-		if ( !checkArgument(swe, sweetMap) ) {
+		if ( !CheckArgument(swe, sweetMap) ) {
 			return ;
 		}
 
@@ -251,12 +248,12 @@ abstract class Q7_1 implements Q7Action{
 		}
 		System.out.print(" 0:退出 ) :" );
 		ice = scanner.nextInt();
-		if ( !checkArgument(ice, IceMap) ) {
+		if ( !CheckArgument(ice, IceMap) ) {
 			return ;
 		}
 
 		orderRow ++;
-		createOrder(String.format("0000%s", String.valueOf(orderRow)), custNm, num, cap, swe, ice);
+		CreateOrder(String.format("0000%s", String.valueOf(orderRow)), custNm, num, cap, swe, ice);
 		
 	    System.out.printf("您點選的餐點為: %s, %s, %s, %s, $%d !", 
 	    			menuDate.get(num).getName(),  
@@ -271,7 +268,7 @@ abstract class Q7_1 implements Q7Action{
 		
 	}
 	
-	public boolean checkArgument(int argu, Map<Integer, ?> asMap) {
+	public boolean CheckArgument(int argu, Map<Integer, ?> asMap) {
 		if (argu == 0) {
 			System.out.println("回上一層");
 			return false;
@@ -282,7 +279,7 @@ abstract class Q7_1 implements Q7Action{
 		return true;
 	}
 	
-	public void searchOrder() {
+	public void SearchOrder() {
 		String custNm;
 		System.out.print("請輸入顧客姓名:");
 		custNm = scanner.next();
