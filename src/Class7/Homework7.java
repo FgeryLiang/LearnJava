@@ -423,7 +423,7 @@ class Q7_o extends Q7_1 {
 //						}
 
 						mPtion = getSerialNumber();
-						if ( checkArgument(mPtion, menuData) < 0) {
+						if ( checkArgument(mPtion, menuData) <= 0) {
 							System.out.println("輸入錯誤，請重新輸入" );
 							break;
 						}
@@ -784,7 +784,7 @@ class Q7_m extends Q7_1 {
 			System.out.println("新增取消" );
 			break;
 		case 2:
-			System.out.print("是否確定修改 序號 " + Key + ", 飲品細項 (" + moditem  + ") " + asContext + " 為 " + asContext + " ? (Y: 是  N :否):" );
+			System.out.print("是否確定修改 序號 " + Key + ", 飲品細項 (" + moditem  + ") 為 " + asContext + " ? (Y: 是  N :否):" );
 			if ( (scanner.next()).equalsIgnoreCase("Y") ) {
 				return true;
 			}
