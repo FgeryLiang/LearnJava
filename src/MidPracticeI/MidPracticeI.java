@@ -66,6 +66,11 @@ class mi_2 {
 	public void exec(int size) {
 		int row = 0;
 		int arrayInt[] = { 0, 1, 2, 3, 4, 5 };
+		
+		for ( int i = 0; i <= size; i++) {
+			arrayInt[i] = i;
+		}
+	
 		int tarInt = (int) ((Math.random() * (9 - 1 + 1)) + 1);
 		for (int i = 0; i < arrayInt.length; i++) {
 			for (int j = 0; j < arrayInt.length; j++) {
