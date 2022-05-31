@@ -11,10 +11,13 @@ import java.util.Random;
  */
 public class MidPracticeI {
 	public static void main(String[] args) {
+		System.out.println("Q1:");
 		new mi_1().exec(10);
 		System.out.println("-----------");
+		System.out.println("Q2:");
 		new mi_2().exec(5);
 		System.out.println("-----------");
+		System.out.println("Q3:");
 		new mi_3().exec();
 	}
 }
